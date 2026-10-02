@@ -3,16 +3,10 @@ const express = require("express");
 const userRouter = express.Router();
 
 // Local Module
-const { registeredHomes } = require("./hostRouter");
+const { getHomes } = require("../controllers/homes");
 
 userRouter.get("/", (req, res) => {
-  res.render("home", {
-    registeredHomes:registeredHomes,
-    pageTitle: "airbnb Home",
-    currentPage: "Home",
-  });
+  getHomes(req, res);
 });
-
-
 
 module.exports = userRouter;

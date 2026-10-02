@@ -9,6 +9,8 @@
     const { hostRouter } = require("./routes/hostRouter");
     const rootDir = require("./utils/pathUtil");
 
+    const { get404 } = require("./controllers/error");
+
     const app = express();
 
     app.set("view engine", "ejs");
@@ -20,9 +22,7 @@
 
     app.use(express.static(path.join(rootDir, "public")));
 
-    app.use((req, res, next) => {
-      res.status(404).render("404", { pageTitle: "Page Not Found" });
-    });
+    app.use(get404);
 
     const PORT = 3000;
     app.listen(PORT, () => {

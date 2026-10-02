@@ -6,23 +6,13 @@
       <h2 class="text-3xl text-red-500 font-bold text-center mb-6">
         Here are our registered homes:
       </h2>
-      <% if (registeredHomes.length === 0) { %>
-        <p class="text-center text-gray-600">
-          No homes have been registered yet. Add the first one!
-        </p>
-      <% } else { %>
-        <div class="flex flex-wrap justify-center gap-6">
-          <% registeredHomes.forEach(home => { %>
+      <div class="flex flex-wrap justify-center gap-6">
+        <% registeredHomes.forEach(home => { %>
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 w-full max-w-sm">
-            <img src="<%= home.photoUrl %>" alt="<%= home.houseName %>" class="w-full h-48 object-cover">
+            <img alt="<%= home.houseName %>" src="<%= home.photoUrl %>" class="w-full h-48 object-cover">
             <div class="p-4">
               <h3 class="text-xl font-semibold text-gray-800 mb-2"><%= home.houseName %></h3>
-              <p class="flex items-center text-gray-600 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-2 text-red-500" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" clip-rule="evenodd" />
-                </svg>
-                <%= home.location %>
-              </p>
+              <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2"></i><%= home.location %></p>
               <div class="flex justify-between items-center mb-2">
                 <span class="text-lg font-bold text-red-500">Rs<%= home.price %> / night</span>
                 <div class="flex items-center">
@@ -34,9 +24,8 @@
               </div>
             </div>
           </div>
-          <% }) %>
-        </div>
-      <% } %>
+        <% }) %>
+      </div>
     </main>
   </body>
 </html>
