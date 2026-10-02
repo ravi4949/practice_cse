@@ -1,10 +1,10 @@
-<%- include('partials/head') %>
+<%- include('../partials/head') %>
   </head>
   <body>
-    <%- include('partials/nav') %>
+    <%- include('../partials/nav') %>
     <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-6xl">
       <h2 class="text-3xl text-red-500 font-bold text-center mb-6">
-        Here are our registered homes:
+        Here are our favorite homes:
       </h2>
       <div class="flex flex-wrap justify-center gap-6">
         <% registeredHomes.forEach(home => { %>
@@ -22,6 +22,7 @@
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
               </div>
+              <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">Book Now</button>
             </div>
           </div>
         <% }) %>

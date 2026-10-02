@@ -5,8 +5,8 @@
     const express = require("express");
 
     //Local Module
-    const userRouter = require("./routes/userRouter");
-    const { hostRouter } = require("./routes/hostRouter");
+    const storeRouter = require("./routes/storeRouter");
+    const hostRouter = require("./routes/hostRouter");
     const rootDir = require("./utils/pathUtil");
 
     const { get404 } = require("./controllers/error");
@@ -17,7 +17,7 @@
     app.set("views", "views");
 
     app.use(express.urlencoded());
-    app.use(userRouter);
+    app.use(storeRouter);
     app.use("/host", hostRouter);
 
     app.use(express.static(path.join(rootDir, "public")));
