@@ -5,6 +5,7 @@ const rootDir = require("../utils/pathUtil");
 
 module.exports = class Home {
   constructor(houseName, price, location, rating, photoUrl) {
+    this.id = Math.random().toString(36); // Generate a random ID
     this.houseName = houseName;
     this.price = price;
     this.location = location;
@@ -22,6 +23,13 @@ module.exports = class Home {
       }
     });
   });
+  }
+
+  static findById(homeId, callback) {
+    Home.fetchAll((registeredHomes) => {
+      const home = registeredHomes.find((h) => h.id === homeId);
+      callback(home);
+    });
   }
 
   static fetchAll(callback) {

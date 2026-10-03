@@ -22,7 +22,9 @@
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
               </div>
-              <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">Book Now</button>
+              <a href="/home-list/<%= home.id %>" ><button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 mr-2">View Details</button>
+              </a>
+              <%- include("../partials/favourite",{ home: home }) %>
             </div>
           </div>
         <% }) %>
