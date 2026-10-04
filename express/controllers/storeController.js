@@ -2,17 +2,17 @@ const Home = require("../models/home");
 const Favourite = require("../models/favourite");
 
 exports.getIndex = (req, res) => {
-  Home.fetchAll((registeredHomes) => {
+  Home.fetchAll().then(([registeredHomes]) => {
     res.render("store/index", {
       registeredHomes: registeredHomes,
       pageTitle: "airbnb Home",
       currentPage: "Index",
-    });
+    }); 
   });
 };
 
 exports.getHomes = (req, res) => {
-  Home.fetchAll((registeredHomes) => {
+  Home.fetchAll().then(([registeredHomes]) => {
     res.render("store/home-list", {
       registeredHomes: registeredHomes,
       pageTitle: "airbnb Home",
@@ -23,7 +23,8 @@ exports.getHomes = (req, res) => {
 
 exports.getHomeDetails = (req, res) => {
   const homeId = req.params.homeId;
-  Home.findById(homeId, (home) => {
+  Home.findById(homeId).then(([rows]) => {
+    const home = rows[0];
     if (!home) {
       return res.redirect("/home-list");
     }
@@ -44,14 +45,14 @@ exports.getBookings = (req, res) => {
 
 exports.getFavouriteList = (req, res) => {
   Favourite.getAllFavourites((favouriteIds) => {
-    Home.fetchAll((registeredHomes) => {
+    Home.fetchAll().then(([registeredHomes]) => {
       const favouriteHomes = registeredHomes.filter((home) =>
         favouriteIds.includes(home.id)
       );
       res.render("store/favourite-list", {
         favouriteHomes: favouriteHomes,
         pageTitle: "airbnb Favourite List",
-        currentPage: "Favourite List",
+        currentPage: "FavouriteList",
       });
     });
   });
@@ -60,6 +61,13 @@ exports.getFavouriteList = (req, res) => {
 exports.postAddToFavourite = (req, res) => {
   const { homeId } = req.body;
   Favourite.addToFavourite(homeId, () => {
+    res.redirect("/favourite-list");
+  });
+};
+
+exports.postDeleteFromFavourite = (req, res) => {
+  const { homeId } = req.params;
+  Favourite.deleteById(homeId).then(() => {
     res.redirect("/favourite-list");
   });
 };
