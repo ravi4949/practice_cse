@@ -1,32 +1,32 @@
-const db = require("../utils/databaseutil");
+const mongoose = require("mongoose");
+const Favourite = require("./favourite");
 
-module.exports = class Home {
-  constructor(houseName, price, location, rating, photourl, description, id) {
-    this.houseName = houseName;
-    this.price = price;
-    this.location = location;
-    this.rating = rating;
-    this.photourl = photourl;
-    this.description = description;
-    this.id = id;
-  }
+const homeSchema = new mongoose.Schema({
+  houseName: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  photourl:String,
+  description: {
+    type: String,
+  },
+});
 
-  save() {
-    return db.execute(
-      `INSERT INTO homes (houseName, price, location, rating, photourl, description) VALUES (?, ?, ?, ?, ?, ?)`,
-      [this.houseName, this.price, this.location, this.rating, this.photourl, this.description]
-    );
-  }
+homeSchema.pre("findOneAndDelete", async function() {
+  const homeId = this.getQuery()._id;
+  await Favourite.deleteMany({homeId: homeId});
+});
 
-  static findById(homeId) {
-    return db.execute("SELECT * FROM homes WHERE id = ?", [homeId]);
-  }
-
-  static fetchAll() {
-    return db.execute("SELECT * FROM homes");
-  }
-
-  static delete(homeId) {
-    return db.execute("DELETE FROM homes WHERE id = ?", [homeId]);
-  }
-};
+module.exports = mongoose.model("Home", homeSchema);

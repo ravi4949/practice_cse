@@ -22,8 +22,8 @@
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
               </div>
-              <a href="/home-list/<%= home.id %>" ><button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 mr-2">View Details</button></a>
-                <form action="/favourites/delete/<%= home.id %>" method="POST">
+              <a href="/home-list/<%= home._id %>" ><button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 mr-2">View Details</button></a>
+                <form action="/favourites/delete/<%= home._id %>" method="POST">
                   <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">Remove from Favorites</button>
                 </form>
             </div>
