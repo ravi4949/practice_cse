@@ -3,7 +3,15 @@ const express = require("express");
 const storeRouter = express.Router();
 
 // Local Module
-const { getHomes, getBookings, getFavouriteList, getIndex, getHomeDetails, postAddToFavourite, postDeleteFromFavourite } = require("../controllers/storeController");
+const {
+  getHomes,
+  getBookings,
+  getFavouriteList,
+  getIndex,
+  getHomeDetails,
+  postAddToFavourite,
+  postDeleteFromFavourite,
+} = require("../controllers/storeController");
 
 storeRouter.get("/", (req, res) => {
   getIndex(req, res);
